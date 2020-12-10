@@ -1,0 +1,37 @@
+{
+  "name": "symmetrical-octo-fiesta",
+  "version": "1.0.0",
+  "description": "Lorem Ipsum is unattractive, both inside and out. I fully understand why it’s former users left it for something else. They made a good decision. That other text? Sadly, it’s no longer a 10.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/srzvan/symmetrical-octo-fiesta.git"
+  },
+  "keywords": [
+    "nextjs",
+    "typescript",
+    "material-ui"
+  ],
+  "author": "Răzvan Sbîngu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/srzvan/symmetrical-octo-fiesta/issues"
+  },
+  "homepage": "https://github.com/srzvan/symmetrical-octo-fiesta#readme",
+  "dependencies": {
+    "@material-ui/core": "^4.11.2",
+    "next": "^10.0.3",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "typescript": "^4.1.2",
+    "yup": "^0.32.6"
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.12"
+  }
+}
