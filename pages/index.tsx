@@ -1,9 +1,9 @@
 import * as React from "react";
-import { Button, Container, makeStyles, Typography } from "@material-ui/core";
+import { Button, Container, makeStyles, Theme, Typography } from "@material-ui/core";
 
 import RegisterForm from "../src/components/RegisterForm";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme: Theme) => ({
   container: {
     color: "white",
     background: "linear-gradient(270deg, #0AA5AB 0.4%, #00528C 99.98%)",
@@ -20,9 +20,12 @@ const useStyles = makeStyles({
     },
     "& a": {
       padding: 0,
+      color: "#B6FBF8",
+      lineHeight: "18px",
+      fontWeight: theme.typography.fontWeightBold,
     },
   },
-});
+}));
 
 function Register() {
   var classes = useStyles();

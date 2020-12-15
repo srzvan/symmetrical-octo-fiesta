@@ -50,6 +50,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     alignItems: "flex-start",
     "& .MuiCheckbox-root": {
       padding: "0 0.6875rem 0 0",
+      color: "inherit",
     },
     "& a": {
       color: "inherit",
