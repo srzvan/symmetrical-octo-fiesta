@@ -10,6 +10,7 @@ import {
   makeStyles,
   OutlinedInput,
   TextField,
+  Theme,
   Typography,
   Zoom,
 } from "@material-ui/core";
@@ -21,10 +22,27 @@ import { HelpOutlineRounded as HelpOutlineRoundedIcon } from "@material-ui/icons
 
 const { useState } = React;
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme: Theme) => ({
   form: {
     "& > *:not(:last-child)": {
       marginBottom: ".5rem",
+    },
+    "& .MuiFormLabel-root": {
+      color: "inherit",
+      opacity: 0.7,
+    },
+    "& .MuiInputBase-root": {
+      borderRadius: "8px",
+      borderColor: "white",
+      color: "white",
+      backgroundColor: "rgba(255, 255, 255, 0.2)",
+      "& .MuiOutlinedInput-notchedOutline": {
+        borderColor: "inherit",
+      },
+    },
+    "& .MuiInputAdornment-root .MuiIconButton-label": {
+      color: "white",
+      opacity: 0.7,
     },
   },
   checkbox: {
@@ -42,9 +60,15 @@ const useStyles = makeStyles({
   },
   submitButton: {
     borderRadius: "2.5em",
+    color: "#006EAD",
+    fontWeight: theme.typography.fontWeightBold,
     backgroundColor: "white",
+    "&.Mui-disabled": {
+      color: "#006EAD",
+      backgroundColor: "rgba(255, 255, 255, 0.6)",
+    },
   },
-});
+}));
 
 function RegisterForm() {
   const [isAccountIdTooltipOpen, setisAccountIdTooltipOpenOpen] = useState(false);
@@ -71,6 +95,7 @@ function RegisterForm() {
         <OutlinedInput
           id="account-id"
           type="password"
+          label="Account ID"
           endAdornment={
             <DarkTooltip
               TransitionComponent={Zoom}
@@ -103,19 +128,20 @@ function RegisterForm() {
             >
               <InputAdornment position="end">
                 <IconButton aria-label="Toggle password visibility" onClick={handleAccountIdTooltipOpen}>
-                  <HelpOutlineRoundedIcon />
+                  <HelpOutlineRoundedIcon fontSize="small" />
                 </IconButton>
               </InputAdornment>
             </DarkTooltip>
           }
         />
       </FormControl>
-      <TextField label="Email adress" variant="outlined" fullWidth />
+      <TextField label="Email address" variant="outlined" fullWidth />
       <FormControl variant="outlined" fullWidth>
         <InputLabel htmlFor="password">Password</InputLabel>
         <OutlinedInput
           id="password"
           type="password"
+          label="Password"
           endAdornment={
             <InputAdornment position="end">
               <IconButton aria-label="Toggle password visibility">
@@ -130,6 +156,7 @@ function RegisterForm() {
         <OutlinedInput
           id="confirm-password"
           type="password"
+          label="Confirm password"
           endAdornment={
             <InputAdornment position="end">
               <IconButton aria-label="Toggle password visibility">

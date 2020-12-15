@@ -1,9 +1,9 @@
 import * as React from "react";
-import { Button, makeStyles, Tooltip, TooltipProps } from "@material-ui/core";
+import { Button, makeStyles, Theme, Tooltip, TooltipProps } from "@material-ui/core";
 
 import { HelpOutlineRounded as HelpOutlineRoundedIcon } from "@material-ui/icons";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme: Theme) => ({
   arrow: {
     color: "#32424E",
   },
@@ -27,8 +27,9 @@ const useStyles = makeStyles({
   closeButton: {
     color: "inherit",
     alignSelf: "flex-end",
+    fontWeight: theme.typography.fontWeightBold,
   },
-});
+}));
 
 function DarkTooltip(props: TooltipProps) {
   const { title, ...otherProps } = props;
