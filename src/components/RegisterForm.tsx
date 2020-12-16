@@ -20,9 +20,9 @@ import DarkTooltip from "../components/DarkTooltip";
 import { Visibility as VisibilityIcon } from "@material-ui/icons";
 import { HelpOutlineRounded as HelpOutlineRoundedIcon } from "@material-ui/icons";
 
-const { useState } = React;
+var { useState } = React;
 
-const useStyles = makeStyles((theme: Theme) => ({
+var useStyles = makeStyles((theme: Theme) => ({
   form: {
     "& > *:not(:last-child)": {
       marginBottom: ".5rem",
@@ -72,7 +72,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 function RegisterForm() {
-  const [isAccountIdTooltipOpen, setisAccountIdTooltipOpenOpen] = useState(false);
+  var [isAccountIdTooltipOpen, setisAccountIdTooltipOpenOpen] = useState(false);
 
   var classes = useStyles();
 

@@ -1,9 +1,9 @@
 import * as React from "react";
 import { Fade, Grid, makeStyles, Typography } from "@material-ui/core";
 
-const { useEffect, useState } = React;
+var { useEffect, useState } = React;
 
-const useStyles = makeStyles({
+var useStyles = makeStyles({
   loading: {
     height: "100%",
     background: "linear-gradient(114.83deg, #3EC1BE 1.18%, #006EAD 84.18%)",

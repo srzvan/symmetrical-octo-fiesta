@@ -1,21 +1,18 @@
-import React from "react";
+import * as React from "react";
 import Document, { Html, Head, Main, NextScript } from "next/document";
 import { ServerStyleSheets } from "@material-ui/styles";
-import { createMuiTheme, responsiveFontSizes } from "@material-ui/core/styles";
-
-const theme = responsiveFontSizes(createMuiTheme());
 
 class MyDocument extends Document {
   static async getInitialProps(ctx) {
-    const sheets = new ServerStyleSheets();
-    const originalRenderPage = ctx.renderPage;
+    var sheets = new ServerStyleSheets();
+    var originalRenderPage = ctx.renderPage;
 
     ctx.renderPage = () =>
       originalRenderPage({
         enhanceApp: App => props => sheets.collect(<App {...props} />),
       });
 
-    const initialProps = await Document.getInitialProps(ctx);
+    var initialProps = await Document.getInitialProps(ctx);
 
     return {
       ...initialProps,
@@ -33,7 +30,6 @@ class MyDocument extends Document {
       <Html>
         <Head>
           <meta charSet="utf-8" />
-          <meta name="theme-color" content={theme.palette.primary.main} />
           <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons"

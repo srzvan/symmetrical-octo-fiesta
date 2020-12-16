@@ -3,7 +3,7 @@ import { Button, makeStyles, Theme, Tooltip, TooltipProps } from "@material-ui/c
 
 import { HelpOutlineRounded as HelpOutlineRoundedIcon } from "@material-ui/icons";
 
-const useStyles = makeStyles((theme: Theme) => ({
+var useStyles = makeStyles((theme: Theme) => ({
   arrow: {
     color: "#32424E",
   },
@@ -32,8 +32,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 function DarkTooltip(props: TooltipProps) {
-  const { title, ...otherProps } = props;
-  const classes = useStyles();
+  var { title, ...otherProps } = props;
+  var classes = useStyles();
 
   return (
     <Tooltip
