@@ -18,6 +18,7 @@ import {
 import DarkTooltip from "../../../app/components/DarkTooltip";
 
 import { Visibility as VisibilityIcon } from "@material-ui/icons";
+import { VisibilityOff as VisibilityOffIcon } from "@material-ui/icons";
 import { HelpOutlineRounded as HelpOutlineRoundedIcon } from "@material-ui/icons";
 
 var { useState } = React;
@@ -71,31 +72,74 @@ var useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
+type FormValues = {
+  accountId?: string;
+  email?: string;
+  password?: string;
+  userTermsAndConditions?: boolean;
+};
+
+type State = {
+  isAccountIdTooltipOpen: boolean;
+  isPasswordVisible: boolean;
+  isConfirmPasswordVisible: boolean;
+};
+
+enum AccountIdTooltipState {
+  CLOSE,
+  OPEN,
+}
+
+enum PasswordVisibilityProp {
+  PASSWORD = "isPasswordVisible",
+  CONFIRM_PASSWORD = "isConfirmPasswordVisible",
+}
+
 function RegisterForm() {
-  var [isAccountIdTooltipOpen, setisAccountIdTooltipOpenOpen] = useState(false);
+  var [formValues, setFormValues] = useState<FormValues>();
+  var [state, setState] = useState<State>({
+    isAccountIdTooltipOpen: false,
+    isPasswordVisible: false,
+    isConfirmPasswordVisible: false,
+  });
 
   var classes = useStyles();
 
-  function handleAccountIdTooltipOpen() {
-    setisAccountIdTooltipOpenOpen(true);
+  function handleAccountIdTooltipVisibility(state: AccountIdTooltipState) {
+    setState(prevState => ({
+      ...prevState,
+      isAccountIdTooltipOpen: Boolean(state),
+    }));
   }
 
-  function handleAccountIdTooltipClose() {
-    setisAccountIdTooltipOpenOpen(false);
+  function handlePasswordVisibility(passwordFieldType: PasswordVisibilityProp) {
+    setState(prevState => ({
+      ...prevState,
+      [passwordFieldType]: !state[passwordFieldType],
+    }));
+  }
+
+  function handleChange(event: React.FormEvent<HTMLFormElement>) {
+    var input = event.target as HTMLInputElement;
+
+    setFormValues(prevState => ({
+      ...prevState,
+      [input.name]: input.value,
+    }));
   }
 
   function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
-    console.log(event);
+    console.log(formValues);
   }
 
   return (
-    <form className={classes.form} onSubmit={handleSubmit}>
+    <form className={classes.form} onChange={handleChange} onSubmit={handleSubmit}>
       <FormControl variant="outlined" fullWidth>
         <InputLabel htmlFor="account-id">Account ID</InputLabel>
         <OutlinedInput
           id="account-id"
-          type="password"
+          name="accountId"
           label="Account ID"
           endAdornment={
             <DarkTooltip
@@ -114,8 +158,8 @@ function RegisterForm() {
                   },
                 },
               }}
-              onClose={handleAccountIdTooltipClose}
-              open={isAccountIdTooltipOpen}
+              onClose={() => handleAccountIdTooltipVisibility(AccountIdTooltipState.CLOSE)}
+              open={state.isAccountIdTooltipOpen}
               disableFocusListener
               disableHoverListener
               disableTouchListener
@@ -128,7 +172,10 @@ function RegisterForm() {
               }
             >
               <InputAdornment position="end">
-                <IconButton aria-label="Toggle password visibility" onClick={handleAccountIdTooltipOpen}>
+                <IconButton
+                  aria-label="Toggle tooltip"
+                  onClick={() => handleAccountIdTooltipVisibility(AccountIdTooltipState.OPEN)}
+                >
                   <HelpOutlineRoundedIcon fontSize="small" />
                 </IconButton>
               </InputAdornment>
@@ -136,17 +183,21 @@ function RegisterForm() {
           }
         />
       </FormControl>
-      <TextField label="Email address" variant="outlined" fullWidth />
+      <TextField name="email" label="Email address" variant="outlined" fullWidth />
       <FormControl variant="outlined" fullWidth>
         <InputLabel htmlFor="password">Password</InputLabel>
         <OutlinedInput
           id="password"
-          type="password"
+          name="password"
+          type={state.isPasswordVisible ? "text" : "password"}
           label="Password"
           endAdornment={
             <InputAdornment position="end">
-              <IconButton aria-label="Toggle password visibility">
-                <VisibilityIcon />
+              <IconButton
+                aria-label="Toggle password visibility"
+                onClick={() => handlePasswordVisibility(PasswordVisibilityProp.PASSWORD)}
+              >
+                {state.isPasswordVisible ? <VisibilityOffIcon /> : <VisibilityIcon />}
               </IconButton>
             </InputAdornment>
           }
@@ -156,12 +207,16 @@ function RegisterForm() {
         <InputLabel htmlFor="confirm-password">Confirm password</InputLabel>
         <OutlinedInput
           id="confirm-password"
-          type="password"
+          name="confirmPassword"
+          type={state.isConfirmPasswordVisible ? "text" : "password"}
           label="Confirm password"
           endAdornment={
             <InputAdornment position="end">
-              <IconButton aria-label="Toggle password visibility">
-                <VisibilityIcon />
+              <IconButton
+                aria-label="Toggle password visibility"
+                onClick={() => handlePasswordVisibility(PasswordVisibilityProp.CONFIRM_PASSWORD)}
+              >
+                {state.isConfirmPasswordVisible ? <VisibilityOffIcon /> : <VisibilityIcon />}
               </IconButton>
             </InputAdornment>
           }
