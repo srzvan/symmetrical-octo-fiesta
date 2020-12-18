@@ -1,6 +1,6 @@
 import * as React from "react";
 import Head from "next/head";
-import { createMuiTheme, responsiveFontSizes, ThemeProvider } from "@material-ui/core";
+import { createMuiTheme, CssBaseline, responsiveFontSizes, ThemeProvider } from "@material-ui/core";
 
 import SplashScreen from "../src/components/SplashScreen";
 
@@ -16,11 +16,12 @@ function App({ Component, pageProps }) {
       <Head>
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
       </Head>
-      <SplashScreen>
-        <ThemeProvider theme={theme}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <SplashScreen>
           <Component {...pageProps} />
-        </ThemeProvider>
-      </SplashScreen>
+        </SplashScreen>
+      </ThemeProvider>
     </>
   );
 }
