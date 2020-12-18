@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Fade, Grid, makeStyles, Typography } from "@material-ui/core";
+import { Grid, makeStyles, Typography } from "@material-ui/core";
 
 var { useEffect, useState } = React;
 

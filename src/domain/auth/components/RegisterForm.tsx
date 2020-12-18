@@ -15,7 +15,7 @@ import {
   Zoom,
 } from "@material-ui/core";
 
-import DarkTooltip from "../components/DarkTooltip";
+import DarkTooltip from "../../../app/components/DarkTooltip";
 
 import { Visibility as VisibilityIcon } from "@material-ui/icons";
 import { HelpOutlineRounded as HelpOutlineRoundedIcon } from "@material-ui/icons";
@@ -101,7 +101,7 @@ function RegisterForm() {
             <DarkTooltip
               TransitionComponent={Zoom}
               TransitionProps={{ timeout: 250 }}
-              placement="bottom"
+              placement="bottom-start"
               PopperProps={{
                 disablePortal: true,
                 popperOptions: {

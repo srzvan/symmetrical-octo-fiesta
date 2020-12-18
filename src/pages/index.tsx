@@ -1,17 +1,25 @@
 import * as React from "react";
 import { Button, Container, Grid, Hidden, makeStyles, Theme, Typography } from "@material-ui/core";
 
-import RegisterForm from "../src/components/RegisterForm";
+import RegisterForm from "../domain/auth/components/RegisterForm";
 
 var useStyles = makeStyles((theme: Theme) => ({
   header: {
     padding: "40px 16px 34px 16px",
-    height: "130px",
-    textAlign: "center",
-    backgroundColor: "transparent",
+    marginBottom: "-17px",
+    textAlign: "right",
+    clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 calc(75% - 17px))",
+    "& > p": {
+      display: "inline-block",
+      width: "168px",
+      height: "64px",
+      backgroundColor: "gray",
+      color: "white",
+      textAlign: "center",
+    },
   },
   grid: {
-    clipPath: "polygon(0 0, 100% 30px, 100% 100%, 0% 100%)",
+    clipPath: "polygon(0 0, 100% 17px, 100% 100%, 0% 100%)",
     height: "100%",
   },
   leftColumn: {
@@ -48,7 +56,7 @@ function Register() {
   return (
     <>
       <header className={classes.header}>
-        <Typography variant="body1">Header</Typography>
+        <Typography variant="body1">Logo</Typography>
       </header>
       <Grid container className={classes.grid}>
         <Hidden mdDown>

@@ -2,11 +2,11 @@ import * as React from "react";
 import Head from "next/head";
 import { createMuiTheme, CssBaseline, responsiveFontSizes, ThemeProvider } from "@material-ui/core";
 
-import SplashScreen from "../src/components/SplashScreen";
+import SplashScreen from "../app/components/SplashScreen";
 
-import { theme as themeObject } from "../src/theme";
+import { theme as themeObject } from "../styles/theme";
 
-import "../src/global-styles.css";
+import "../styles/global-styles.css";
 
 var theme = responsiveFontSizes(createMuiTheme(themeObject));
 
