@@ -32,7 +32,7 @@ class MyDocument extends Document {
           <meta charSet="utf-8" />
           <link
             rel="stylesheet"
-            href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons"
+            href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;700&family=Material+Icons&family=Material+Icons&display=swap"
           />
         </Head>
         <body>
