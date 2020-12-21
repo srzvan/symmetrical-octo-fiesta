@@ -1,15 +1,7 @@
 import * as React from "react";
-import { Grid, makeStyles, Typography } from "@material-ui/core";
+import { Grid, makeStyles, Typography, useMediaQuery, useTheme } from "@material-ui/core";
 
 var { useEffect, useState } = React;
-
-var useStyles = makeStyles({
-  loading: {
-    height: "100%",
-    background: "linear-gradient(114.83deg, #3EC1BE 1.18%, #006EAD 84.18%)",
-    color: "white",
-  },
-});
 
 function Loading(props: { className?: string }) {
   return (
@@ -25,6 +17,10 @@ function Loading(props: { className?: string }) {
 
 function SplashScreen({ children }) {
   var [isLoading, setIsLoading] = useState(true);
+  var theme = useTheme();
+
+  const mediaQuery = theme.breakpoints.down("md");
+  var isMobile = useMediaQuery(mediaQuery);
 
   var classes = useStyles();
 
@@ -42,7 +38,19 @@ function SplashScreen({ children }) {
     }
   }, []);
 
-  return isLoading ? <Loading className={classes.loading} /> : children;
+  if (isMobile) {
+    return isLoading ? <Loading className={classes.loading} /> : children;
+  } else {
+    return children;
+  }
 }
+
+var useStyles = makeStyles({
+  loading: {
+    height: "100%",
+    background: "linear-gradient(114.83deg, #3EC1BE 1.18%, #006EAD 84.18%)",
+    color: "white",
+  },
+});
 
 export default SplashScreen;
