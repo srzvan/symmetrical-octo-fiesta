@@ -23,60 +23,12 @@ import { HelpOutlineRounded as HelpOutlineRoundedIcon } from "@material-ui/icons
 
 var { useState } = React;
 
-var useStyles = makeStyles((theme: Theme) => ({
-  form: {
-    "& > *:not(:last-child)": {
-      marginBottom: ".5rem",
-    },
-    "& .MuiFormLabel-root": {
-      color: "inherit",
-      opacity: 0.7,
-    },
-    "& .MuiInputBase-root": {
-      borderRadius: "8px",
-      borderColor: "white",
-      color: "white",
-      backgroundColor: "rgba(255, 255, 255, 0.2)",
-      "& .MuiOutlinedInput-notchedOutline": {
-        borderColor: "inherit",
-      },
-    },
-    "& .MuiInputAdornment-root .MuiIconButton-label": {
-      color: "white",
-      opacity: 0.7,
-    },
-  },
-  checkbox: {
-    margin: ".5rem 0",
-    alignItems: "flex-start",
-    "& .MuiCheckbox-root": {
-      padding: "0 0.6875rem 0 0",
-      color: "inherit",
-    },
-    "& a": {
-      color: "inherit",
-    },
-  },
-  tooltipMessage: {
-    lineHeight: "20px",
-  },
-  submitButton: {
-    borderRadius: "2.5em",
-    color: "#006EAD",
-    fontWeight: theme.typography.fontWeightBold,
-    backgroundColor: "white",
-    "&.Mui-disabled": {
-      color: "#006EAD",
-      backgroundColor: "rgba(255, 255, 255, 0.6)",
-    },
-  },
-}));
-
 type FormValues = {
-  accountId?: string;
+  viasatAccountId?: string;
   email?: string;
   password?: string;
-  userTermsAndConditions?: boolean;
+  confirmPassword?: string;
+  termsAndConditions?: boolean;
 };
 
 type State = {
@@ -90,7 +42,7 @@ enum AccountIdTooltipState {
   OPEN,
 }
 
-enum PasswordVisibilityProp {
+enum PasswordFieldType {
   PASSWORD = "isPasswordVisible",
   CONFIRM_PASSWORD = "isConfirmPasswordVisible",
 }
@@ -105,27 +57,27 @@ function RegisterForm() {
 
   var classes = useStyles();
 
-  function handleAccountIdTooltipVisibility(state: AccountIdTooltipState) {
-    setState(prevState => ({
-      ...prevState,
-      isAccountIdTooltipOpen: Boolean(state),
-    }));
+  function handleAccountIdTooltipVisibility(tooltipState: AccountIdTooltipState) {
+    setState({
+      ...state,
+      isAccountIdTooltipOpen: Boolean(tooltipState),
+    });
   }
 
-  function handlePasswordVisibility(passwordFieldType: PasswordVisibilityProp) {
-    setState(prevState => ({
-      ...prevState,
+  function handlePasswordVisibility(passwordFieldType: PasswordFieldType) {
+    setState({
+      ...state,
       [passwordFieldType]: !state[passwordFieldType],
-    }));
+    });
   }
 
   function handleChange(event: React.FormEvent<HTMLFormElement>) {
     var input = event.target as HTMLInputElement;
 
-    setFormValues(prevState => ({
-      ...prevState,
+    setFormValues({
+      ...formValues,
       [input.name]: input.value,
-    }));
+    });
   }
 
   function handleSubmit(event: React.FormEvent) {
@@ -195,7 +147,7 @@ function RegisterForm() {
             <InputAdornment position="end">
               <IconButton
                 aria-label="Toggle password visibility"
-                onClick={() => handlePasswordVisibility(PasswordVisibilityProp.PASSWORD)}
+                onClick={() => handlePasswordVisibility(PasswordFieldType.PASSWORD)}
               >
                 {state.isPasswordVisible ? <VisibilityOffIcon /> : <VisibilityIcon />}
               </IconButton>
@@ -214,7 +166,7 @@ function RegisterForm() {
             <InputAdornment position="end">
               <IconButton
                 aria-label="Toggle password visibility"
-                onClick={() => handlePasswordVisibility(PasswordVisibilityProp.CONFIRM_PASSWORD)}
+                onClick={() => handlePasswordVisibility(PasswordFieldType.CONFIRM_PASSWORD)}
               >
                 {state.isConfirmPasswordVisible ? <VisibilityOffIcon /> : <VisibilityIcon />}
               </IconButton>
@@ -238,5 +190,54 @@ function RegisterForm() {
     </form>
   );
 }
+
+var useStyles = makeStyles((theme: Theme) => ({
+  form: {
+    "& > *:not(:last-child)": {
+      marginBottom: ".5rem",
+    },
+    "& .MuiFormLabel-root": {
+      color: "inherit",
+      opacity: 0.7,
+    },
+    "& .MuiInputBase-root": {
+      borderRadius: "8px",
+      borderColor: "white",
+      color: "white",
+      backgroundColor: "rgba(255, 255, 255, 0.2)",
+      "& .MuiOutlinedInput-notchedOutline": {
+        borderColor: "inherit",
+      },
+    },
+    "& .MuiInputAdornment-root .MuiIconButton-label": {
+      color: "white",
+      opacity: 0.7,
+    },
+  },
+  checkbox: {
+    margin: ".5rem 0",
+    alignItems: "flex-start",
+    "& .MuiCheckbox-root": {
+      padding: "0 0.6875rem 0 0",
+      color: "inherit",
+    },
+    "& a": {
+      color: "inherit",
+    },
+  },
+  tooltipMessage: {
+    lineHeight: "20px",
+  },
+  submitButton: {
+    borderRadius: "2.5em",
+    color: "#006EAD",
+    fontWeight: theme.typography.fontWeightBold,
+    backgroundColor: "white",
+    "&.Mui-disabled": {
+      color: "#006EAD",
+      backgroundColor: "rgba(255, 255, 255, 0.6)",
+    },
+  },
+}));
 
 export default RegisterForm;
